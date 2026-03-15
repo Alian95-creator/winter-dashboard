@@ -1,0 +1,109 @@
+/* Reset dasar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Background winter aesthetic */
+.winter-bg {
+  min-height: 100vh;
+  background-image: url("https://images.unsplash.com/photo-1483664852095-d6cc6870702d");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  color: #ffffff;
+}
+
+/* Overlay supaya teks lebih jelas */
+.winter-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(2px);
+  z-index: 0;
+}
+
+header,
+.search-section,
+.weather-container,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+header p {
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+/* Search section */
+.search-section {
+  margin-bottom: 25px;
+}
+
+#cityInput {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  width: 220px;
+}
+
+#searchBtn {
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  margin-left: 8px;
+  background: #3a86ff;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#searchBtn:hover {
+  background: #265df2;
+}
+
+/* Weather card (glassmorphism style) */
+.weather-card {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 25px;
+  width: 260px;
+  margin-top: 10px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.weather-card h2 {
+  margin-bottom: 10px;
+}
+
+.weather-card p {
+  margin: 6px 0;
+  font-size: 1rem;
+}
+
+/* Footer */
+footer {
+  margin-top: 30px;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
