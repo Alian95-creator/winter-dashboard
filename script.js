@@ -61,3 +61,41 @@ async function getWeather(city) {
   }
 }
 
+// Spinner setup
+const weatherCard = document.querySelector(".weather-card");
+const spinner = document.createElement("div");
+spinner.className = "spinner";
+spinner.innerHTML = `<div class="double-bounce1"></div><div class="double-bounce2"></div>`;
+weatherCard.appendChild(spinner);
+
+async function getWeather(city) {
+  try {
+    // show spinner
+    spinner.style.display = "block";
+    weatherCard.style.opacity = 0.5;
+
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
+    const response = await fetch(url);
+    if(!response.ok) throw new Error("City not found");
+    const data = await response.json();
+
+    // update DOM
+    cityName.textContent = data.name;
+    temp.textContent = data.main.temp.toFixed(1);
+    desc.textContent = data.weather[0].description;
+    humidity.textContent = data.main.humidity;
+
+    // hide spinner
+    spinner.style.display = "none";
+    weatherCard.style.opacity = 1;
+  } catch(err) {
+    spinner.style.display = "none";
+    weatherCard.style.opacity = 1;
+    alert(err.message);
+    cityName.textContent = "City";
+    temp.textContent = "--";
+    desc.textContent = "--";
+    humidity.textContent = "--";
+  }
+}
+
