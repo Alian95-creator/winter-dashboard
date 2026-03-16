@@ -61,6 +61,20 @@ async function getWeather(city) {
   }
 }
 
+function getWeatherByLocation(lat, lon) {
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      cityName.textContent = data.name;
+      temp.textContent = data.main.temp.toFixed(1);
+      desc.textContent = data.weather[0].description;
+      humidity.textContent = data.main.humidity;
+    })
+    .catch(err => console.error(err));
+}
+
 // Spinner setup
 const weatherCard = document.querySelector(".weather-card");
 const spinner = document.createElement("div");
@@ -115,3 +129,20 @@ function createSnowflake() {
 // generate snow continuously
 setInterval(createSnowflake, 200);
 
+// Auto detect user location
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      getWeatherByLocation(lat, lon);
+    },
+    (error) => {
+      console.log("Location access denied");
+      getWeather("Jakarta"); // fallback city
+    }
+  );
+} else {
+  getWeather("Jakarta");
+}
