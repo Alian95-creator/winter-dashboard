@@ -20,5 +20,23 @@ cityInput.addEventListener("keyup", (e) => {
     if(e.key ==="Enter") searchBtn.click();
 });
 
+//Function fetch weater
+const API_KEY = "df6334151dcd279d1bc10d59a854fb9a";
 
+async function getWeater(city) {
+    try {
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+// Update event listener search
+searchBtn.addEventListener("click", () => {
+    const city = cityInput.ariaValueMax.trim();
+    if(city) getWeather(city);
+})
 
